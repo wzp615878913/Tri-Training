@@ -1,0 +1,7 @@
+label_0_preview & label_1_preview: 从preview表中整理出来的已标记样本，1为有心理障碍，0为无心理障碍
+
+label_0_psycases & label_1_psycases:
+从psycases表中整理出来的已标记样本，1为有心理障碍，0为无心理障碍
+
+label_1_consult :
+从psycases表中整理出来的已标记样本1为有心理障碍

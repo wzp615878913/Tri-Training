@@ -1,0 +1,48 @@
+﻿学生表里：enrollmentStatus和currentStatus没用
+
+
+将所有我认为有用的字段的意思在下文中写出：
+
+1.心理预检: 将记录写入preview表
+	对应的type1,type2,type3是interviewtype里的;zd0,zd1,zd2分别对应于是否符合心理障碍,是否紧急,是否危险,0代表是,1代表否
+
+2.心理咨询：将记录写入psycases和consultrecord表
+
+	psycases : type1,2,3同上; riskid对应于riskevaluate表 ; (isover是否结案)
+	
+	consultrecord : suggestion_id对应于consultsuggestion表
+
+3.心理评估：将记录写入interviewrecord表
+
+	对应的type1,2,3同上; suggestion对应于interview_suggestion表
+	
+4.危机干预：
+
+	多标签可能用到的label: sui_ty,harm_ty,att_bias,cp_sex,sch_crisis,run_away,crimimal_of,unsafe,other_risk
+	普通标签: main_crisis(首要危机),scheme(处理方案)
+	一系列特征: SRA,SHRA,ARA等得分,危险等级
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,20 @@
+-----preview表------
+uid
+zdo:(0有心理障碍 1 无心理障碍)
+
+
+----psycases表-------
+uid 
+riskid (1无心理障碍 2，3有心理障碍)
+
+----consultrecord------
+uid
+suggestion_id(2,4有心理障碍)
+
+-----interviewrecord----
+sid
+suggestion(2,3,4有心理障碍,1,5正常)
+
+----crisisintervention-----
+uid
+全部有心理障碍

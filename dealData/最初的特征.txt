@@ -1,0 +1,50 @@
+-------背景信息---------
+学历：education,grade
+专业：department
+性别：gender
+是否婚配：marriage
+父亲是否健在：fathersta
+母亲是否健在：mothersta
+父母婚姻状况：parentsMarriage
+是否非常优异：isRecommended
+是否多才多艺：isArtStudent
+是否非常聪明：isRecommendedByContest
+父亲受教育程度：fatherEducation
+母亲受教育程度：motherEducation
+宗教信仰：religion
+兄弟姐妹个数：brotherSisterCount
+户口类型：residence
+政治面貌：politicalStatus
+
+------答题情况-------------
+BDI得分： BDIPoint
+EPQ得分： EPQPoint
+E量表得分： EScale
+P量表得分： PScale
+N量表得分： NScale
+L量表得分： LScale
+FA 得分： FAPoint
+FA-1(家庭婚姻状况) ： FAMarriage
+FA-2(家庭关系紧密程度)：FAAttachmentRelation
+FA-3(家庭付出均衡程度)：FAFamilyFunction
+FA-4(童年创伤)：FAChildhoodTrauma
+FA-5(应对方式)：FACopingStyle
+FA-6(既往经历)：FAPastExperience
+FA-7(社会支持)：FASocialSupport
+FA-8(人生意义): FALifeMeaning
+FA-9(学习动机)： FALearningMotivation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
