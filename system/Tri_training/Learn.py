@@ -15,8 +15,8 @@ class Learn:
 	"""SVM算法"""
 	def SVM(self,S):
 		train = S
-		y = train['pt']
-		x = train.drop(['uid','pt'],1)
+		y = train['type']
+		x = train.drop(['id','type'],1)
 		x_train = x.values
 		y_train = y.values
 		clt = svm.SVC(C=821,kernel='rbf',gamma=0.001,decision_function_shape='ovr')
@@ -26,8 +26,8 @@ class Learn:
 	""" 朴素贝叶斯算法 """
 	def Naive_Bayes(self,S):
 		train = S
-		y = train['pt']
-		x = train.drop(['uid','pt'],1)
+		y = train['type']
+		x = train.drop(['id','type'],1)
 		x_train = x.values
 		y_train = y.values.ravel()
 		gnb = GaussianNB()
@@ -36,8 +36,8 @@ class Learn:
 	""" 决策树算法 """
 	def Tree(self,S):
 		train = S
-		y = train['pt']
-		x = train.drop(['uid','pt'],1)
+		y = train['type']
+		x = train.drop(['id','type'],1)
 		x_train = x.values
 		y_train = y.values.ravel()
 		clf = tree.DecisionTreeClassifier()
@@ -64,14 +64,11 @@ class Learn:
   #   	xgtrain = xgb.DMatrix(X, label=y)  
   #  		bst = xgb.train(params, xgtrain, num_boost_round=rounds)  
    		
-  
-
-
 
 	""" 准确率评估 """
 	def Estimate(self,T,M):
-		y = train['pt']
-		x = train.drop(['uid','pt'],1)
+		y = T['type']
+		x = T.drop(['id','type'],1)
 		x_test = x.values
 		y_test = y.values	
 		score = M.score(x_test,y_test)
@@ -87,10 +84,18 @@ class Learn:
 	
 if __name__ == '__main__':
 	pro = Process()
-	S = pro.read_labeled()
+	pro.read_labeled()
+	L = pro.L
+	sample = Sample()
+	sample.gen_Train_Set(L)
+	S = sample.S
 	learn = Learn()
-	M = learn.genModel(2,S)
-	print(M)
+	M_1 = learn.genModel(0,L)
+	M_2 = learn.genModel(0,S[0])
+	score1 = learn.Estimate(pro.T, M_1)
+	score2 = learn.Estimate(pro.T, M_2)
+	print(score1)
+	print(score2)
 	
 	
 

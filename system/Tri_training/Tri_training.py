@@ -25,10 +25,11 @@ class Tri_training:
 	""" 准备数据 """
 	def pre_data(self):
 		pro = Process()
-		unlabel = pro.read_unlabeled().sample(n = 2000)
 		pro.read_labeled()
+		pro.read_unlabeled()
+		unlabel = pro.U.sample(n = 3500)
 		sample = Sample()
-		sample.gen_Train_Set()
+		sample.gen_Train_Set(pro.L)
 		self.S = sample.S
 		self.L = pro.L
 		self.U = unlabel
@@ -36,7 +37,7 @@ class Tri_training:
 		learn = Learn()
 		self.Learn = learn
 		for i in range(3):
-			self.M.append(learn.genModel(i,self.S[i]))
+			self.M.append(learn.genModel(2,self.S[i]))
 
 	""" 估计从两个分类器的组合中导出的假设的分类错误率 """
 	def MeasureError(self,H_j,H_k):
@@ -85,7 +86,7 @@ class Tri_training:
 						pre_k = M_jk[1].predict(row_x[1:].reshape(1,-1))
 						if pre_j == pre_k:
 							x = row[1].to_frame().transpose()
-							x['pt'] = pre_j
+							x['type'] = pre_j
 							self.Ln[i] = self.Ln[i].append(x,ignore_index = True)
 							count[i]+=1
 					if self.l_1[i] == 0:
@@ -104,27 +105,18 @@ class Tri_training:
 				if self.Update[i] == True:
 					change = True
 					Train[i] = pd.concat([self.L,self.Ln[i]],ignore_index = True)
-					self.M[i] = self.Learn.genModel(i,Train[i])
+					self.M[i] = self.Learn.genModel(2,Train[i])
 					self.e[i] = self.E[i]
 					self.l_1[i] = count[i]
 			self.Update = []
 			self.Ln = []
 			self.E = []
-			# print('第{0}次循环'.format(n))
-			# print(self.Estimate.Score(M = self.M,T = self.T))
-
+			print('第{0}次循环'.format(n))
+			print(self.Estimate.Score(M = self.M,T = self.T))
 
 if __name__ == "__main__":
 	tri = Tri_training()
 	tri.pre_data()
-	# print(tri.M)
 	tri.Training()
-	# L = pd.concat([tri.L,tri.Ln[0]])
-	# pre = tri.Estimate(tri.T)
-	# print(pre)
-	# print(tri.U)
-	# err = tri.MeasureError(tri.M[1],tri.M[2])
-	# print(err)
-
 
 

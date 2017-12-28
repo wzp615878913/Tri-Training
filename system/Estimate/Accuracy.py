@@ -5,8 +5,8 @@ class  estimate:
 	"""准确率评估"""
 	def Score(self,M,T):
 		score = []
-		y = T['pt']
-		x = T.drop(['uid','pt'],1)
+		y = T['type']
+		x = T.drop(['id','type'],1)
 		x_test = x.values
 		y_test = y.values
 		for i in range(3):
