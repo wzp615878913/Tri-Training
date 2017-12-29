@@ -3,8 +3,8 @@ from Learn import Learn
 import pandas as pd
 import math
 from bootstrapSample import Sample
-from system.Estimate.Accuracy import estimate
-
+from system.Estimate.Report import estimate
+from Bagging import Bagging
 
 class Tri_training:
 	"""三体训练法"""
@@ -37,7 +37,7 @@ class Tri_training:
 		learn = Learn()
 		self.Learn = learn
 		for i in range(3):
-			self.M.append(learn.genModel(2,self.S[i]))
+			self.M.append(learn.genModel(1,self.S[i]))
 
 	""" 估计从两个分类器的组合中导出的假设的分类错误率 """
 	def MeasureError(self,H_j,H_k):
@@ -65,7 +65,9 @@ class Tri_training:
 
 	""" 训练过程 """
 	def Training(self):
-		print(self.Estimate.Score(M = self.M,T = self.T))
+		# self.Estimate.class_report(M = self.M,T = self.T)
+		tri_clt = Bagging(self.M)
+		self.Estimate.bagging_report(M = tri_clt,T = self.T)
 		change = True
 		n = 0
 		while change:
@@ -105,14 +107,18 @@ class Tri_training:
 				if self.Update[i] == True:
 					change = True
 					Train[i] = pd.concat([self.L,self.Ln[i]],ignore_index = True)
-					self.M[i] = self.Learn.genModel(2,Train[i])
+					self.M[i] = self.Learn.genModel(1,Train[i])
 					self.e[i] = self.E[i]
 					self.l_1[i] = count[i]
 			self.Update = []
 			self.Ln = []
 			self.E = []
 			print('第{0}次循环'.format(n))
-			print(self.Estimate.Score(M = self.M,T = self.T))
+			tri_clt = Bagging(self.M)
+			self.Estimate.bagging_report(M = tri_clt,T = self.T)
+			# self.Estimate.class_report(M = self.M,T = self.T)
+
+
 
 if __name__ == "__main__":
 	tri = Tri_training()

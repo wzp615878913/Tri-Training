@@ -6,6 +6,7 @@ import numpy as np
 from bootstrapSample import Sample
 from system.Setting.config import Config
 from process import Process
+from Bagging import Bagging
 
 
 class Learn:
@@ -86,17 +87,14 @@ if __name__ == '__main__':
 	pro = Process()
 	pro.read_labeled()
 	L = pro.L
-	sample = Sample()
-	sample.gen_Train_Set(L)
-	S = sample.S
+	T = pro.T
 	learn = Learn()
-	M_1 = learn.genModel(0,L)
-	M_2 = learn.genModel(0,S[0])
-	score1 = learn.Estimate(pro.T, M_1)
-	score2 = learn.Estimate(pro.T, M_2)
-	print(score1)
-	print(score2)
-	
+	M = []
+	for i in range(3):
+		M.append(learn.genModel(i,L))
+	bagging = Bagging(M)
+	y_pre = bagging.predict(T)
+	print(type(y_pre))
 	
 
 
